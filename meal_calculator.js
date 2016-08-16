@@ -1,3 +1,4 @@
+// Variable to receive orders
 var newPerson;
 
 // Sum the values in an array
@@ -5,7 +6,7 @@ function getSum(total, num) {
     return total + num;
 };
 
-// diner object to collect orders
+// diner object to copy orders
 function diner() {
     this.name = "";
     this.app = "";
@@ -59,6 +60,17 @@ bill.grandtotal = function() {
   return grandtotal;
 };
 
+// Cost for each individual if bill is split evenly
+bill.splitbill = function() {
+  var people = this.diners.length;
+  var splitbill = this.grandtotal()/people;
+  splitbill += .01;
+  if (bill.diners.length == 1) {
+    return "----";
+  };
+  return parseFloat(splitbill).toFixed(2);
+};
+
 // Facilitate each diner's orders
 function collectOrders() {
   var name = $('#name');
@@ -75,7 +87,7 @@ function collectOrders() {
 
 // Print each diner's order on the screen
 function listOrders() {
-  var dinerbox = $("section.tickets").clone();
+  var dinerbox = $(".template .tickets").clone();
 
   var appendname = dinerbox.find(".dinername");
   appendname.text(newPerson.name);
@@ -83,7 +95,15 @@ function listOrders() {
   var appendapp = dinerbox.find(".dinerapp");
   appendapp.text(newPerson.app);
 
-  return dinerbox;
+  var appendentree = dinerbox.find(".dinerentree");
+  appendentree.text(newPerson.entree);
+
+  var appenddessert = dinerbox.find(".dinerdessert");
+  appenddessert.text(newPerson.entree);
+
+  console.log(dinerbox);
+  dinerbox.appendTo("#list-tickets");
+  
 };
 
 // Add each order to the bill
@@ -107,17 +127,19 @@ $(document).ready(function() {
   var html = "";
   $("#bill").hide()
 
+
+  // Submit person's order
   $("#orderbutton").click(function(event){
     event.preventDefault();
+
+    // Require all input fields be filled before submission
     if ($("#name").val() == 0 || $("#app").val() == 0 || $("#entree").val() == 0 || $("#dessert").val() == 0) {
       return false
     };
-    console.log("this button works");
     collectOrders();
     listOrders();
     addToBill();
-    clearInput();
-      
+    clearInput();    
   });
 
 
@@ -150,7 +172,13 @@ $(document).ready(function() {
     
     // Print grand total of the orders
     html2 += "<p>" + "Grand Total: $" + bill.grandtotal().toFixed(2) + "</p>";
+    
+    // Print the cost per person if they split the bill
+    html2 += "<p>" + "Split Bill: $" + bill.splitbill() + " per person" + "</p>";
+
+    // Display the bill
     $("#bill").append(html2);
+
   });
 
   $("#reset").click(function() {

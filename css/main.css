@@ -1,5 +1,8 @@
-form, .tickets {
+form, .tickets, #list-tickets {
   vertical-align: top;
+}
+
+form, #list-tickets {
   margin-top: 3%;
   margin-left: 2%;
 }
@@ -7,7 +10,6 @@ form, .tickets {
 form, .orders {
   display: inline-block;
   position: relative;
-
   width: 300px;
   border: 1px solid grey;
   padding: 20px;
@@ -18,16 +20,24 @@ input {
   padding: 4px;
 }
 
+#list-tickets {
+  position: relative;
+  display: inline-block;
+  max-width: 475px;
+  width: 95%;
+}
+
 .template.hidden {
   display: none;
 }
 
-.tickets {
+.tickets, {
   display: inline-block;
-  position: relative;
-  max-width: 225px;
-  width: 90%;
+ 
+  width: 30%;
   border: 1px solid grey;
-  padding: 1px 15px;
+  padding: 5px;
+  margin: 10px;
   
 }
+
