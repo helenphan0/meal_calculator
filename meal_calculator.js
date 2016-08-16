@@ -1,9 +1,11 @@
 var newPerson;
 
+// Sum the values in an array
 function getSum(total, num) {
     return total + num;
 };
 
+// diner object to collect orders
 function diner() {
     this.name = "";
     this.app = "";
@@ -11,28 +13,33 @@ function diner() {
     this.dessert = "";
 };
 
+// Returns the food costs for diner
 diner.prototype.meal = function() {
     var meal = parseFloat(this.app) + parseFloat(this.entree) + parseFloat(this.dessert);
     return meal;
 };
 
+// Returns the tax for the diner's meal
 diner.prototype.tax = function() {
-    var mealtax = (parseFloat(this.app) + parseFloat(this.entree) + parseFloat(this.dessert))*.0675;
+    var mealtax = (parseFloat(this.app) + parseFloat(this.entree) + parseFloat(this.dessert))*.0625;
     return mealtax
 };
 
+// Returns the tip amount on diner's meal, including tax
 diner.prototype.tip = function() {
     var subtotal = this.meal() + this.tax();
     var tip = subtotal*.18;
     return parseFloat(tip);
 };
 
+// Returns the total of the diner's order, including meal, tax, and tip
 diner.prototype.dinertotal = function() {
     var dinertotal = this.meal() + this.tax() + this.tip();
     return parseFloat(dinertotal);
 };
 
 
+// bill object to collect each diner's order
 var bill = {
     diners: [],
     dinersmeals: [],
@@ -40,16 +47,19 @@ var bill = {
     dinerstotal: [],
 };
 
+// The total amount in tips
 bill.waitresstotal = function() {
   var waitresstotal = this.dinerstip.reduce(getSum);
   return waitresstotal;
 };
 
+// The grand total of all the diner's orders
 bill.grandtotal = function() {
   var grandtotal = this.dinerstotal.reduce(getSum);
   return grandtotal;
 };
 
+// Facilitate each diner's orders
 function collectOrders() {
   var name = $('#name');
   var app = $("#app");
@@ -61,10 +71,9 @@ function collectOrders() {
   newPerson.entree = entree.val();
   newPerson.dessert = dessert.val();
   console.log(newPerson);
-
-
 };
 
+// Print each diner's order on the screen
 function listOrders() {
   var dinerbox = $("section.tickets").clone();
 
@@ -77,6 +86,7 @@ function listOrders() {
   return dinerbox;
 };
 
+// Add each order to the bill
 function addToBill() {
     bill.diners.push(newPerson.name);
     bill.dinersmeals.push(newPerson.meal() + newPerson.tax());
@@ -85,6 +95,7 @@ function addToBill() {
     console.log(bill);
 };
 
+// Clear form fields after each order submission
 function clearInput() {
   $("#name").val("");
   $("#app").val("");
@@ -98,6 +109,9 @@ $(document).ready(function() {
 
   $("#orderbutton").click(function(event){
     event.preventDefault();
+    if ($("#name").val() == 0 || $("#app").val() == 0 || $("#entree").val() == 0 || $("#dessert").val() == 0) {
+      return false
+    };
     console.log("this button works");
     collectOrders();
     listOrders();
@@ -108,6 +122,9 @@ $(document).ready(function() {
 
 
   $("#calculate").click(function() {
+    if (bill.diners.length === 0){
+      return false;
+    };
     var html2 = "";
     var grandtotal ="";
     var waitress = "";
@@ -115,6 +132,9 @@ $(document).ready(function() {
     $("#bill").show()
     html2 += "<p>" + "--------------------------------" + "</p>";
     html2 += "<p>" + "Thank you for eating at Bob's Burgers" + "</p>";
+    html2 += "<p>" + "--------------------------------" + "</p>";
+
+    // Print out each of the orders collected on the bill
     for ( var i = 0; i < bill.diners.length; i++) {
       html2 += "<p>" + "Name: " + bill.diners[i] + "</p>"
       html2 += "<p>" + "Meal Cost: $" + bill.dinersmeals[i].toFixed(2) + "</p>";
@@ -122,7 +142,13 @@ $(document).ready(function() {
       html2 += "<p>" + bill.diners[i] + "'s Total: $" + bill.dinerstotal[i].toFixed(2) + "</p>";
       html2 += "<p>" + "-----------------" + "</p>";
     };
+    html2 += "<p>" + "Tax is 6.25% in the state of MA" + "</p>";
+    html2 += "<p>" + "Tip has been calculated at 18%" + "</p>";
+
+    // Print total in tips
     html2 += "<p>" + "Tip for Waitress Louise: $" + bill.waitresstotal().toFixed(2) + "</p>";
+    
+    // Print grand total of the orders
     html2 += "<p>" + "Grand Total: $" + bill.grandtotal().toFixed(2) + "</p>";
     $("#bill").append(html2);
   });
