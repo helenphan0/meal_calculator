@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Meal Calculator</title>
+        <meta charset="utf-8" />
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+<body>
+	<main>
+        <form class="ordering">
+        	<section id="orderform"">
+		    	<p><label for="name">Name: </label><input id="name" type="text"></p>
+		        <p><label for="app">Appetizer Cost: </label><input id="app" type="number"> </p>
+		        <p><label for="entree">Entree Cost: </label><input id="entree" type="number" value=""> </p>
+		        <p><label for="dessert">Dessert Cost: </label><input id="dessert" type="number" value=""> </p>
+		        <button for="order" type="submit" id="orderbutton">Place Order</button>
+		        <button type="button" id="calculate">Calculate Bill</button>
+	        </section>
+	     
+	        <section id="bill">
+	        <button type="button" id="reset">New Order</button>
+	        </section>
+             
+        </form>
+		<section class="template tickets hidden">
+            <p>Diner: <span class="dinername"></span></p>
+            <p>App: $<span class="dinerapp"></span></p>
+            <p>Entree: $<span class="dinerentree"></span></p>
+            <p>Dessert: $<span class="dinerdessert"></span></p>
+        </section>
+            
+    </main>
+
+
+
+
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript" src="meal_calculator.js"></script>
+</body>
+</html>

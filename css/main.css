@@ -1,0 +1,33 @@
+form, .tickets {
+  vertical-align: top;
+  margin-top: 3%;
+  margin-left: 2%;
+}
+
+form, .orders {
+  display: inline-block;
+  position: relative;
+
+  width: 300px;
+  border: 1px solid grey;
+  padding: 20px;
+}
+
+input {
+  width: 95%;
+  padding: 4px;
+}
+
+.template.hidden {
+  display: none;
+}
+
+.tickets {
+  display: inline-block;
+  position: relative;
+  max-width: 225px;
+  width: 90%;
+  border: 1px solid grey;
+  padding: 1px 15px;
+  
+}
