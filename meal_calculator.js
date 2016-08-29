@@ -133,7 +133,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     // Require all input fields be filled before submission
-    if ($("#name").val() == 0 || $("#app").val() == 0 || $("#entree").val() == 0 || $("#dessert").val() == 0) {
+    if ($("#name").val() == "" || $("#app").val() == "" || $("#entree").val() == "" || $("#dessert").val() == "") {
       return false
     };
     collectOrders();
@@ -148,8 +148,6 @@ $(document).ready(function() {
       return false;
     };
     var html2 = "";
-    var grandtotal ="";
-    var waitress = "";
     $("#orderform").hide();
     $("#bill").show()
     html2 += "<p>" + "--------------------------------" + "</p>";
@@ -162,7 +160,7 @@ $(document).ready(function() {
       html2 += "<p>" + "Meal Cost: $" + bill.dinersmeals[i].toFixed(2) + "</p>";
       html2 += "<p>" + "Tip Amount: $" + bill.dinerstip[i].toFixed(2) + "</p>";
       html2 += "<p>" + bill.diners[i] + "'s Total: $" + bill.dinerstotal[i].toFixed(2) + "</p>";
-      html2 += "<p>" + "-----------------" + "</p>";
+      html2 += "<p>" + "--------------------------------" + "</p>";
     };
     html2 += "<p>" + "Tax is 6.25% in the state of MA" + "</p>";
     html2 += "<p>" + "Tip has been calculated at 18%" + "</p>";
