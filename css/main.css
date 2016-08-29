@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #20B2AA;
+}
+
 form, .tickets, #list-tickets {
   vertical-align: top;
 }
@@ -7,37 +15,50 @@ form, #list-tickets {
   margin-left: 2%;
 }
 
-form, .orders {
+form {
   display: inline-block;
   position: relative;
-  width: 300px;
-  border: 1px solid grey;
+  width: 330px;
   padding: 20px;
+  background-color: white;
 }
 
 input {
   width: 95%;
-  padding: 4px;
+  padding: 5px;
 }
 
 #list-tickets {
   position: relative;
   display: inline-block;
-  max-width: 475px;
-  width: 95%;
+  max-width: 340px;
+  width: 90%;
 }
 
 .template.hidden {
   display: none;
 }
 
-.tickets, {
+.tickets {
   display: inline-block;
- 
-  width: 30%;
-  border: 1px solid grey;
-  padding: 5px;
-  margin: 10px;
+  background-color: white;
+  max-width: 162px;
+  width: 99%;
+  padding: 10px;
+  margin-right: 4px;
+  margin-bottom: 3px;
   
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #FFC125;
+  border-radius: 4px;
+  border: none;
+}
+
+button:hover {
+  background-color: #FFD700;
+  cursor: pointer;
 }
 
